@@ -38,3 +38,34 @@ function rFact(number){
 console.log(rFact(0))
 console.log(rFact(3))
 console.log(rFact(6.5))
+
+function floodFill(canvas2D,startXY,newColor){
+    var x = startXY[0]
+    var y = startXY[1]
+    var original = canvas2D[y][x];
+    canvas2D[y][x] = newColor;
+    if(x > 0 && canvas2D[y][x-1] == original){
+        floodFill(canvas2D, [x-1, y], newColor)
+    }
+    if(y > 0 && canvas2D[y-1][x] == original){
+        floodFill(canvas2D, [x, y-1], newColor)
+    }
+    if(x < canvas2D.length -1 && canvas2D[y][x+1] == original){
+        floodFill(canvas2D, [x+1, y], newColor)
+    }
+    if(y < canvas2D.length -1 && canvas2D[y+1][x] == original){
+        floodFill(canvas2D, [x, y+1], newColor)
+    }
+
+}
+
+var test2d = [
+    [3,2,3,4,3],
+    [2,3,3,4,0],
+    [7,3,3,5,3],
+    [6,5,3,4,1],
+    [1,2,3,3,3]
+]
+
+floodFill(test2d, [2,2], 1)
+console.log(test2d)
